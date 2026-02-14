@@ -1,36 +1,5 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+During the development and deployment of the Smart Bookmark application, I encountered several issues related to authentication, environment configuration, rendering behavior, and real-time updates. 
+One major issue occurred after deploying to Vercel, where Google OAuth login was redirecting users to http://localhost:3000 instead of the production domain, causing an ERR_CONNECTION_REFUSED error. This happened because the redirect URL was hardcoded for local development. I resolved it by dynamically setting the redirect URL using window.location.origin + "/dashboard" and properly configuring the Site URL and Redirect URLs inside Supabase Authentication settings. 
+Another issue occurred during production builds where Vercel failed with the error stating that the Supabase URL and API key were required. This was caused by missing environment variables in Vercel. I fixed it by adding NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in the Vercel project settings and redeploying. I also faced Next.js prerendering errors because the dashboard page relied on authentication and client-side Supabase logic, but Next.js attempted to statically prerender it. To solve this, I forced dynamic rendering for the dashboard page, ensuring it rendered on demand instead of at build time.
+ Additionally, real-time bookmark updates were not reflecting across multiple browser tabs. This was resolved by enabling Realtime for the bookmarks table in Supabase, adding the table to the supabase_realtime publication, and implementing a proper postgres_changes listener in the dashboard component. 
+ I also fixed a React duplicate key error caused by improper state handling during realtime updates by correctly managing INSERT and DELETE events. 
