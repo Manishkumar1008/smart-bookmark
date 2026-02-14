@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { getSupabase } from "./lib/supabaseClient";
 
+export const dynamic = "force-dynamic";
 export default function Home() {
  const supabase = getSupabase();
 
