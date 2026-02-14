@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { getSupabase } from "../lib/supabaseClient";
 
 export default function AddBookmark({ user }) {
+  const supabase = getSupabase();
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
@@ -42,14 +43,14 @@ export default function AddBookmark({ user }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Title"
-          className="border p-2 w-1/3"
+          className="border p-2 w-1/3 text-black"
         />
 
         <input
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="URL"
-          className="border p-2 w-1/2"
+          className="border p-2 w-1/2 text-black"
         />
 
         <button

@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { supabase } from "./lib/supabaseClient";
+import { getSupabase } from "./lib/supabaseClient";
 
 export default function Home() {
+ const supabase = getSupabase();
 
   useEffect(() => {
     const checkUser = async () => {
@@ -19,7 +20,7 @@ export default function Home() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "http://localhost:3000/dashboard",
+        redirectTo: `${window.location.origin}/dashboard`,
         queryParams: { prompt: "select_account" }
       }
     });

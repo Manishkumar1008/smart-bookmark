@@ -1,8 +1,8 @@
 "use client";
-import { supabase } from "../lib/supabaseClient";
+import { getSupabase } from "../lib/supabaseClient";
 
 export default function BookmarkList({ bookmarks }) {
-
+const supabase = getSupabase();
   const remove = async (id) => {
     await supabase.from("bookmarks").delete().eq("id", id);
   };
