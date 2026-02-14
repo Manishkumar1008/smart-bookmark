@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 // "use client";
 
 // import { useEffect, useState } from "react";
 // import { supabase } from "../lib/supabaseClient";
 // import AddBookmark from "../components/AddBookmark";
 // import BookmarkList from "../components/BookmarkList";
+=======
+"use client";
+export const dynamic = "force-dynamic";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
+import AddBookmark from "../components/AddBookmark";
+import BookmarkList from "../components/BookmarkList";
+>>>>>>> c7038c5445959a204bb4fe7e4be94216c8eca9d7
 
 // export default function Dashboard() {
 //   const [user, setUser] = useState(null);
